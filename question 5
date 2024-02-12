@@ -1,0 +1,72 @@
+// Callback hell example
+function asyncOperation1(callback) {
+  setTimeout(() => {
+    console.log('Operation 1');
+    callback();
+  }, 1000);
+}
+
+function asyncOperation2(callback) {
+  setTimeout(() => {
+    console.log('Operation 2');
+    callback();
+  }, 2000);
+}
+
+function asyncOperation3(callback) {
+  setTimeout(() => {
+    console.log('Operation 3');
+    callback();
+  }, 3000);
+}
+
+function callbackHellExample() {
+  asyncOperation1(() => {
+    asyncOperation2(() => {
+      asyncOperation3(() => {
+        console.log('All operations completed.');
+      });
+    });
+  });
+}
+
+callbackHellExample();
+
+// Optimized solution using async/await
+function sleep(millis) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, millis);
+  });
+}
+
+async function asyncOperation1() {
+  await sleep(1000);
+  console.log('Operation 1');
+}
+
+async function asyncOperation2() {
+  await sleep(2000);
+  console.log('Operation 2');
+}
+
+async function asyncOperation3() {
+  await sleep(3000);
+  console.log('Operation 3');
+}
+
+async function optimizedExample() {
+  await asyncOperation1();
+  await asyncOperation2();
+  await asyncOperation3();
+  console.log('All operations completed.');
+}
+
+optimizedExample();
+
+The problem with callback hell in async programming arises when multiple asynchronous operations are nested within each other, leading to deeply nested callbacks. 
+This makes the code harder to read, understand, and maintain. It can also be prone to errors, especially when error handling is involved.
+To optimize the code and avoid callback hell, we can use modern JavaScript features such as Promises, async/await, and the sleep function. 
+By using Promises and async/await, we can write asynchronous code in a more sequential and readable manner, avoiding excessive nesting of callbacks.
+In the optimized example, the asyncOperation1, asyncOperation2, and asyncOperation3 functions are defined as async functions that use the sleep function to introduce delays. 
+The optimizedExample function uses await to wait for each operation to complete before moving on to the next one. 
+This results in cleaner and more maintainable code that is easier to reason about.
