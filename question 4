@@ -1,0 +1,10 @@
+async function mapAsync(array, asyncMappingFunction) {
+  const results = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const result = await asyncMappingFunction(array[i]);
+    results.push(result);
+  }
+
+  return results;
+}
