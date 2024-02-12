@@ -1,0 +1,5 @@
+async function iterateSequentially(array, asyncOperation) {
+  for (let i = 0; i < array.length; i++) {
+    await asyncOperation(array[i]);
+  }
+}
